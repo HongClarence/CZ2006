@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CZ2006</string>
+    <string name="title_water">Water</string>
+    <string name="title_electricity">Electricity</string>
+    <string name="title_settings">Settings</string>
+
+    <string-array name="duration">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
+
+    <integer-array name="color">
+        <item>-16711936</item>
+        <item>-16711681</item>
+        <item>-16776961</item>
+        <item>-65281</item>
+        <item>-256</item>
+    </integer-array>
+</resources>
