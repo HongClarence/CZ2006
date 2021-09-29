@@ -43,10 +43,8 @@ public class ElectricityFragment extends Fragment {
     private TextView textRemaining;
     private TextView textCost;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        electricityViewModel =
-                new ViewModelProvider(this).get(ElectricityViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        electricityViewModel = new ViewModelProvider(this).get(ElectricityViewModel.class);
         binding = FragmentElectricityBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
@@ -59,7 +57,6 @@ public class ElectricityFragment extends Fragment {
                 R.array.duration, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
 
         chart = binding.barChartView;
         textTotal = binding.textTotal;

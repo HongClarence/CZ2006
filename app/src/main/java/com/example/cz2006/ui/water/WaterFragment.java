@@ -40,10 +40,8 @@ public class WaterFragment extends Fragment {
     private TextView textRemaining;
     private TextView textCost;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        waterViewModel =
-                new ViewModelProvider(this).get(WaterViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        waterViewModel = new ViewModelProvider(this).get(WaterViewModel.class);
         binding = FragmentWaterBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();

@@ -17,4 +17,10 @@
         <item>-65281</item>
         <item>-256</item>
     </integer-array>
+
+    <string-array name="settings">
+        <item>Electricity Limit</item>
+        <item>Water Limit</item>
+        <item>Supplier</item>
+    </string-array>
 </resources>
