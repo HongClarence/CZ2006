@@ -1,7 +1,6 @@
-package com.example.cz2006.ui.water;
+package com.example.cz2006;
 
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.example.cz2006.R;
 
 public class applianceTips extends Fragment {
 

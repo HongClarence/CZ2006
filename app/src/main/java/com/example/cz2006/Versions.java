@@ -1,4 +1,4 @@
-package com.example.cz2006.ui.water;
+package com.example.cz2006;
 
 public class Versions {
     private String applianceName, cost, amountUsed, tips;
