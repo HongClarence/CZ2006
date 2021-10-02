@@ -40,9 +40,9 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
     private Spinner spinner;
 
     private BarChart chart;
-    int[] test = new int[] {Color.RED, Color.BLACK, Color.BLUE};
+    int[] color = new int[] {R.color.lightBlue, R.color.purple, R.color.teal_700, R.color.gray};
 
-    int[] color;
+    int[] test;
 
     private TextView textTotal;
     private TextView textUsed;
@@ -59,7 +59,7 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
 
-        color  = getActivity().getResources().getIntArray(R.array.color);
+        test  = getActivity().getResources().getIntArray(R.array.color);
         spinner = binding.spinner;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.duration, R.layout.spinner_item);
@@ -100,9 +100,9 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
 
     private ArrayList<BarEntry> dataValues(){
         ArrayList<BarEntry> dataVals = new ArrayList<>();
-        dataVals.add(new BarEntry(0, new float[]{2, 2, 2, 0, 5}));
-        dataVals.add(new BarEntry(1, new float[]{3, 3, 3, 1, 5}));
-        dataVals.add(new BarEntry(2, new float[]{4, 4, 4, 2, 5}));
+        dataVals.add(new BarEntry(0, new float[]{2, 2, 2, 0}));
+        dataVals.add(new BarEntry(1, new float[]{3, 3, 3, 1}));
+        dataVals.add(new BarEntry(2, new float[]{4, 4, 4, 2}));
         return dataVals;
     }
 
