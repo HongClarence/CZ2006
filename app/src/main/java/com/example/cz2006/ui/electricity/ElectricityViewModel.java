@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 public class ElectricityViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private final MutableLiveData<String> mText;
 
     public ElectricityViewModel() {
         mText = new MutableLiveData<>();

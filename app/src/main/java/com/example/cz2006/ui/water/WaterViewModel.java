@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 public class WaterViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private final MutableLiveData<String> mText;
 
     public WaterViewModel() {
         mText = new MutableLiveData<>();

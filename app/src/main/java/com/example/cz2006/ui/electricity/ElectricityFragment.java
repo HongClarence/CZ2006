@@ -126,8 +126,8 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
         versionsList = new ArrayList<>();
 
         versionsList.add(new Versions("Shower", "$20", "40 Litres", "You are using 29% more water in the shower than the average for your house type!\n\nYour average showering time is 15minutes.\n\nTurn off the shower tap when you are applying soap and shampoo!\n\nYou can cut down your shower time by 5 minutes to save 5 litres of water."));
-        versionsList.add(new Versions("Washing Machine", "$20", "40 Litres", "Just don\'t wash clothes at home bro, just go singapore river wash."));
-        versionsList.add(new Versions("Kitchen Sink", "$12", "12 litres", "Go downstairs use toilet don\'t use the house one"));
+        versionsList.add(new Versions("Washing Machine", "$20", "40 Litres", "Just don't wash clothes at home bro, just go singapore river wash."));
+        versionsList.add(new Versions("Kitchen Sink", "$12", "12 litres", "Go downstairs use toilet don't use the house one"));
         versionsList.add(new Versions("Misc", "$200", "40 litres", "hahahahha water go brrrrrr"));
     }
 
