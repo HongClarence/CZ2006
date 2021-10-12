@@ -1,4 +1,4 @@
-package com.example.cz2006;
+package com.example.cz2006.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cz2006.R;
+import com.example.cz2006.classes.Versions;
 
 import java.util.List;
 

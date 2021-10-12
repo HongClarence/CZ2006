@@ -1,4 +1,4 @@
-package com.example.cz2006;
+package com.example.cz2006.classes;
 
 public class Versions {
     private String applianceName, cost, amountUsed, tips;

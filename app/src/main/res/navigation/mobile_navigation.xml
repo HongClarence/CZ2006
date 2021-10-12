@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_water"
-        android:name="com.example.cz2006.ui.water.WaterFragment"
+        android:name="com.example.cz2006.ui.main.WaterFragment"
         android:label="@string/title_water"
         tools:layout="@layout/fragment_water" />
 
     <fragment
         android:id="@+id/navigation_electricity"
-        android:name="com.example.cz2006.ui.electricity.ElectricityFragment"
+        android:name="com.example.cz2006.ui.main.ElectricityFragment"
         android:label="@string/title_electricity"
         tools:layout="@layout/fragment_electricity" />
 
