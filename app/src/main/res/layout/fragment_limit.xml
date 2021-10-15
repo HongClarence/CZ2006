@@ -12,45 +12,28 @@
         android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
         android:fontFamily="serif"
         android:textColor="@color/black"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        />
 
-    <TextView
-        android:id="@+id/usageReminder"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/text_units"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="25dp"
-        android:fontFamily="serif"
-        android:text="Usage Reminder"
-        android:textColor="@color/black"
-        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/percent"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/usageReminder"
+        android:layout_below="@+id/text_units"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="7dp"
-        android:text="Notify me when I reach 0% of limit "
-        android:textColor="@color/black"
-        android:textSize="13sp" />
-
-    <SeekBar
-        android:id="@+id/setPercentage"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/percent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="41dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="33dp"
+        android:text="You will be reminded at 25%, 50% , 75% and 100% intervals of your limit. "
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        />
 
     <EditText
         android:id="@+id/inputAmount"
@@ -58,13 +41,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_title"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="19dp"
         android:ems="10"
-        android:hint="Integer"
+        android:hint="E.g. 100"
         android:inputType="number"
+        android:maxLength="6"
         android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        />
 
     <TextView
         android:id="@+id/text_units"
@@ -72,24 +59,33 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_title"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="-3dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="54dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="-15dp"
+        android:layout_marginLeft="-15dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginRight="99dp"
         android:layout_toEndOf="@+id/inputAmount"
+        android:layout_toRightOf="@+id/inputAmount"
         android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        />
 
     <TextView
         android:id="@+id/dollarAmount"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_title"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="-22dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:autoSizeTextType="uniform"
         android:text="$0"
         android:textColor="#FF0000"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        />
 
     <Button
         android:id="@+id/cancel_button"
@@ -97,10 +93,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
         android:layout_marginBottom="23dp"
         android:text="Cancel"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        />
 
     <Button
         android:id="@+id/ok_button"
@@ -108,10 +107,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:layout_marginStart="66dp"
+        android:layout_marginLeft="66dp"
         android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
         android:layout_marginBottom="21dp"
         android:layout_toEndOf="@+id/cancel_button"
+        android:layout_toRightOf="@+id/cancel_button"
         android:text="OK"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        />
 </RelativeLayout>
