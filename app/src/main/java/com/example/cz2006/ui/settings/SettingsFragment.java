@@ -43,9 +43,12 @@ public class SettingsFragment extends Fragment {
 
 
         ListView listSettings = binding.listSettings;
-        String[] settings = getActivity().getResources().getStringArray(R.array.settings);
-        ArrayAdapter<String> arr = new ArrayAdapter<String>(this.getActivity(), R.layout.listview_item, settings);
-        listSettings.setAdapter(arr);
+//        String[] settings = getActivity().getResources().getStringArray(R.array.settings);
+        String[] settings = {"Electricity Limit", "Water Limit", "Supplier"};
+        int[] drawableIds = {R.drawable.ic_electricityblue, R.drawable.ic_water1, R.drawable.ic_baseline_person_24};
+//        ArrayAdapter<String> arr = new ArrayAdapter<String>(this.getActivity(), R.layout.listview_item, settings);
+        settingCustomAdapter adapter = new settingCustomAdapter(this.getContext(), settings, drawableIds);
+        listSettings.setAdapter(adapter);
         listSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
                 String selectedFromList = (String) (listSettings.getItemAtPosition(myItemInt));
@@ -65,7 +68,8 @@ public class SettingsFragment extends Fragment {
 
         ListView listLogout = binding.listLogout;
         String[] strlogout = {"Log Out"};
-        ArrayAdapter<String> logout = new ArrayAdapter<String>(this.getActivity(), R.layout.listview_item, strlogout);
+        int[] intlogout = {R.drawable.ic_logout};
+        settingCustomAdapter logout = new settingCustomAdapter(this.getContext(), strlogout, intlogout);
         listLogout.setAdapter(logout);
 
         return root;
