@@ -46,6 +46,6 @@ public class settingCustomAdapter extends BaseAdapter {
         title = (TextView) row.findViewById(R.id.settingRowText);
         title.setText(Title[position]);
         i1.setImageResource(img[position]);
-        return (row);
+        return row;
     }
 }

@@ -40,7 +40,7 @@ public class SettingsFragment extends Fragment {
         settingsViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
 
         ListView listSettings = binding.listSettings;
