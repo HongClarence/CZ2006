@@ -1,5 +1,6 @@
 package com.example.cz2006.ui.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,8 +23,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.cz2006.MainActivity;
 import com.example.cz2006.R;
 import com.example.cz2006.databinding.FragmentSettingsBinding;
+import com.example.cz2006.ui.login.Login;
+import com.example.cz2006.ui.login.Register;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingsFragment extends Fragment {
 
@@ -53,8 +60,7 @@ public class SettingsFragment extends Fragment {
         listSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> myAdapter, View myView, int position, long mylng) {
 
-                switch(position)
-                {
+                switch (position) {
                     case 1:
                         setLimit(0);
                         break;
@@ -75,10 +81,21 @@ public class SettingsFragment extends Fragment {
         int[] intlogout = {R.drawable.ic_logout};
         settingCustomAdapter logout = new settingCustomAdapter(this.getContext(), strlogout, intlogout);
         listLogout.setAdapter(logout);
-
+        listLogout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> myAdapter, View myView, int position, long mylng) {
+                FirebaseAuth.getInstance().signOut();
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        // user is now signed out
+                        startActivity(new Intent(myView.getContext(), Login.class));
+//
+//                    }
+//                });
+            }
+        });
         return root;
     }
-
     public void setLimit(int type){
         Button ok_button, cancel_button;
         TextView title, units, dollarAmount;
@@ -103,14 +120,20 @@ public class SettingsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String input = inputAmount.getText().toString();
-                num = Integer.parseInt(input);
-                dollarAmount.setText( "$" + (int) num * rate );
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if(!editable.toString().trim().equals("")){
+                    String input = inputAmount.getText().toString();
+                    num = Integer.parseInt(input);
+                    dollarAmount.setText( "$" + (int) num * rate );
+                }
+                else{
+                    //reset amount to 0
+                    dollarAmount.setText("$0");
+                }
             }
         });
 
@@ -134,8 +157,12 @@ public class SettingsFragment extends Fragment {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //settingsViewModel.setLimits(type, Double.parseDouble(inputAmount.getText().toString()), percentage);
-                int limitAmount = Integer.parseInt(inputAmount.getText().toString()); //store inputAmount
+                //store inputAmount
+                String temp=inputAmount.getText().toString();
+                int value=0;
+                if (!"".equals(temp)){
+                    value=Integer.parseInt(temp);
+                }
                 dialog.dismiss();
             }
         });
@@ -242,5 +269,4 @@ public class SettingsFragment extends Fragment {
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.getWindow().setLayout(1000, 1000);
     }
-
 }

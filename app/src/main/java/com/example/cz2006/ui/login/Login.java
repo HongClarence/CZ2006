@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ public class Login extends AppCompatActivity {
     private Button mLoginBtn;
     private TextView mRegisterLink;
     private FirebaseAuth fAuth;
+    private ProgressBar progBar;
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class Login extends AppCompatActivity {
         mEmail = (EditText) findViewById(R.id.EmailAddress);
         mPassword = (EditText) findViewById(R.id.Password);
         mRegisterLink = findViewById(R.id.RegisterLink);
-
+        progBar= findViewById(R.id.progressBar);
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +62,7 @@ public class Login extends AppCompatActivity {
                     mPassword.setError("Password is must be more than 6 characters. ");
                     return;
                 }
+                progBar.setVisibility(View.VISIBLE);
 
                 fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -66,6 +70,7 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(Login.this, "Logged in successfully.", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            finish();
                         } else {
                             Toast.makeText(Login.this, "Error!", Toast.LENGTH_SHORT).show();
                         }
