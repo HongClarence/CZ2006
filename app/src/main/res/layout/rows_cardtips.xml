@@ -27,8 +27,8 @@
                 android:padding="5dp"
                 android:text="Appliance"
                 android:textColor="@color/white"
-                android:textSize="22sp"
-                android:fontFamily="@font/actor"
+                android:textSize="24sp"
+                android:fontFamily="@font/abel"
                 />
 
 
@@ -43,9 +43,9 @@
                 android:layout_marginRight="7dp"
                 android:padding="5dp"
                 android:text="Cost"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/actor"
+                android:fontFamily="@font/abel"
                 />
         </RelativeLayout>
 
@@ -56,13 +56,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Usage"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="@color/white"
                 android:id="@+id/usage"
                 android:padding="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="@font/actor"
+                android:fontFamily="@font/abel"
                 />
 
             <TextView
@@ -73,10 +73,10 @@
                 android:layout_alignParentRight="true"
                 android:padding="5dp"
                 android:text="Amount Used"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="@color/white"
                 android:layout_marginRight="5dp"
-                android:fontFamily="@font/actor"
+                android:fontFamily="@font/abel"
                 />
         </RelativeLayout>
 
@@ -91,11 +91,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:fontFamily="@font/actor"
+                android:fontFamily="@font/abel"
                 android:padding="10dp"
                 android:text="Tips TextView"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </RelativeLayout>
 

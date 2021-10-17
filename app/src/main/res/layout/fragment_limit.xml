@@ -14,9 +14,10 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_alignParentLeft="true"
-        android:fontFamily="serif"
+        android:fontFamily="@font/abel"
         android:textColor="@color/black"
         android:textSize="30dp"
+
         />
 
 
@@ -30,8 +31,9 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="33dp"
-        android:text="You will be reminded at 25%, 50% , 75% and 100% intervals of your limit. "
+        android:text="You will be notified at 25%, 50% , 75% and 100% intervals of your limit. "
         android:textColor="@color/black"
+        android:fontFamily="@font/abel"
         android:textSize="16sp"
         />
 
@@ -50,6 +52,7 @@
         android:inputType="number"
         android:maxLength="6"
         android:textColor="@color/black"
+        android:fontFamily="@font/abel"
         android:textSize="22sp"
         />
 
@@ -69,6 +72,7 @@
         android:layout_toRightOf="@+id/inputAmount"
         android:textColor="@color/black"
         android:textSize="22sp"
+        android:fontFamily="@font/abel"
         />
 
     <TextView
@@ -85,6 +89,7 @@
         android:text="$0"
         android:textColor="#FF0000"
         android:textSize="22sp"
+        android:fontFamily="@font/abel"
         />
 
     <Button
@@ -99,6 +104,7 @@
         android:layout_marginBottom="23dp"
         android:text="Cancel"
         android:textColor="@color/black"
+        android:fontFamily="@font/abel"
         />
 
     <Button
@@ -117,5 +123,6 @@
         android:layout_toRightOf="@+id/cancel_button"
         android:text="OK"
         android:textColor="@color/black"
+        android:fontFamily="@font/abel"
         />
 </RelativeLayout>
