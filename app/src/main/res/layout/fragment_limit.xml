@@ -49,7 +49,7 @@
         android:layout_marginTop="19dp"
         android:ems="10"
         android:hint="E.g. 100"
-        android:inputType="number"
+        android:inputType="numberSigned"
         android:maxLength="6"
         android:textColor="@color/black"
         android:fontFamily="@font/abel"

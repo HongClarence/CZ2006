@@ -103,14 +103,20 @@ public class SettingsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String input = inputAmount.getText().toString();
-                num = Integer.parseInt(input);
-                dollarAmount.setText( "$" + (int) num * rate );
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if(!editable.toString().trim().equals("")){
+                    String input = inputAmount.getText().toString();
+                    num = Integer.parseInt(input);
+                    dollarAmount.setText( "$" + (int) num * rate );
+                }
+                else{
+                    //reset amount to 0
+                    dollarAmount.setText("$0");
+                }
             }
         });
 
@@ -134,8 +140,12 @@ public class SettingsFragment extends Fragment {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //settingsViewModel.setLimits(type, Double.parseDouble(inputAmount.getText().toString()), percentage);
-                int limitAmount = Integer.parseInt(inputAmount.getText().toString()); //store inputAmount
+                //store inputAmount
+                String temp=inputAmount.getText().toString();
+                int value=0;
+                if (!"".equals(temp)){
+                    value=Integer.parseInt(temp);
+                }
                 dialog.dismiss();
             }
         });
