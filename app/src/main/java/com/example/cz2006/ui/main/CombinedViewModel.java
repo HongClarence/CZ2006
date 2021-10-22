@@ -35,9 +35,9 @@ public class CombinedViewModel extends ViewModel {
         Summary electricitySummary = new Summary("$100", "50kWh", "50kWh", "$50");
 
         List<BarEntry> barEntryList = new ArrayList<BarEntry>();
-        barEntryList.add(new BarEntry(0, new float[]{2, 2, 2, 0}));
-        barEntryList.add(new BarEntry(1, new float[]{3, 3, 3, 1}));
-        barEntryList.add(new BarEntry(2, new float[]{4, 4, 4, 2}));
+        barEntryList.add(new BarEntry(1, new float[]{2, 2, 2, 0}));
+        barEntryList.add(new BarEntry(2, new float[]{3, 3, 3, 1}));
+        barEntryList.add(new BarEntry(3, new float[]{4, 4, 4, 2}));
 
         List<Versions> versionsList = new ArrayList<Versions>();
         versionsList.add(new Versions("Shower", "$20", "40 Litres", "You are using 29% more water in the shower than the average for your house type!\n\nYour average showering time is 15minutes.\n\nTurn off the shower tap when you are applying soap and shampoo!\n\nYou can cut down your shower time by 5 minutes to save 5 litres of water."));

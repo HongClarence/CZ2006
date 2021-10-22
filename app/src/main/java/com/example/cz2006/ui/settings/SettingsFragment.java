@@ -42,7 +42,6 @@ public class SettingsFragment extends Fragment {
 
     private int num;
 
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         settingsViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
@@ -178,7 +177,7 @@ public class SettingsFragment extends Fragment {
         dialog = dialogBuilder.create();
         dialog.show();
         dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.getWindow().setLayout(1000, 1000);
+        dialog.getWindow().setLayout(1000, 830);
     }
 
     @Override
@@ -267,6 +266,6 @@ public class SettingsFragment extends Fragment {
         dialog = dialogBuilder.create();
         dialog.show();
         dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.getWindow().setLayout(1000, 1000);
+        dialog.getWindow().setLayout(1000, 930);
     }
 }

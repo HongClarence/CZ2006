@@ -23,6 +23,7 @@ import com.example.cz2006.adapters.VersionsAdapter;
 import com.example.cz2006.classes.Response;
 import com.example.cz2006.databinding.FragmentElectricityBinding;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 
@@ -50,6 +51,17 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
         spinner.setOnItemSelectedListener(this);
 
         chart = binding.barChartView;
+        chart.getAxisLeft().setDrawGridLines(false);
+        chart.getAxisRight().setDrawGridLines(false);
+        chart.getXAxis().setDrawGridLines(false);
+
+        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        chart.getAxisLeft().setEnabled(false);
+        chart.getDescription().setEnabled(false);
+
+        chart.getAxisLeft().setAxisMinimum(0);
+        chart.getAxisRight().setAxisMinimum(0);
+        chart.getXAxis().setGranularity(1f);
 
         TextView textTotal = binding.textTotal;
         TextView textUsed = binding.textUsed;
@@ -65,8 +77,9 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
                 textRemaining.setText(response.getSummary().getRemaining());
                 textCost.setText(response.getSummary().getCost());
 
-                BarDataSet barDataSet = new BarDataSet(response.getBarEntryList(), "test");
+                BarDataSet barDataSet = new BarDataSet(response.getBarEntryList(), "");
                 barDataSet.setColors(color);
+                barDataSet.setStackLabels(new String[]{"AA", "AAA", "AAA", "AAA"});
                 BarData barData = new BarData(barDataSet);
                 barData.setDrawValues(false);
                 chart.setData(barData);
