@@ -1,8 +1,13 @@
 package com.example.cz2006;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.widget.Spinner;
 
+import com.example.cz2006.ui.main.CombinedViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_water, R.id.navigation_electricity, R.id.navigation_settings)
                 .build();

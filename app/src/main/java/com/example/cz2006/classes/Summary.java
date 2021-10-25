@@ -1,28 +1,28 @@
 package com.example.cz2006.classes;
 
 public class Summary {
-    private String total, used, remaining, cost;
+    private int total, used, remaining, cost;
 
-    public Summary(String total, String used, String remaining, String cost) {
+    public Summary(int total, int used, int remaining, int cost) {
         this.total = total;
         this.used = used;
         this.remaining = remaining;
         this.cost = cost;
     }
 
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public String getUsed() {
+    public int getUsed() {
         return used;
     }
 
-    public String getRemaining() {
+    public int getRemaining() {
         return remaining;
     }
 
-    public String getCost() {
+    public int getCost() {
         return cost;
     }
 }
