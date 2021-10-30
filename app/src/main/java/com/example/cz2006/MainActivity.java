@@ -1,33 +1,37 @@
 package com.example.cz2006;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.widget.Spinner;
 
-import com.example.cz2006.ui.main.CombinedViewModel;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.example.cz2006.ui.fragments.SharedViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.cz2006.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private SharedViewModel sharedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(sharedViewModel.getRequest(3, ""));
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(

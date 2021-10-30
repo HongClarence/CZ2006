@@ -4,6 +4,14 @@ public class Versions {
     private String applianceName, cost, amountUsed, tips;
     private boolean expandable;
 
+    public Versions(String applianceName, String cost, String amountUsed, String tips) {
+        this.applianceName = applianceName;
+        this.cost = cost;
+        this.amountUsed = amountUsed;
+        this.tips = tips;
+        this.expandable = false;
+    }
+
     public String getApplianceName() {
         return applianceName;
     }
@@ -42,14 +50,6 @@ public class Versions {
 
     public void setExpandable(boolean expandable) {
         this.expandable = expandable;
-    }
-
-    public Versions(String applianceName, String cost, String amountUsed, String tips) {
-        this.applianceName = applianceName;
-        this.cost = cost;
-        this.amountUsed = amountUsed;
-        this.tips = tips;
-        this.expandable = false;
     }
 
     @Override

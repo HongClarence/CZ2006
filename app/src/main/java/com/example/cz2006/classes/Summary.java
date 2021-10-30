@@ -1,28 +1,43 @@
 package com.example.cz2006.classes;
 
 public class Summary {
-    private int total, used, remaining, cost;
+    private float waterUsage;
+    private float waterCost;
+    private float electricityUsage;
+    private float electricityCost;
+    private float waterRemaining;
+    private float electricityRemaining;
 
-    public Summary(int total, int used, int remaining, int cost) {
-        this.total = total;
-        this.used = used;
-        this.remaining = remaining;
-        this.cost = cost;
+    public Summary(float waterUsage, float waterCost, float electricityUsage, float electricityCost, float waterRemaining, float electricityRemaining) {
+        this.waterUsage = waterUsage;
+        this.waterCost = waterCost;
+        this.electricityUsage = electricityUsage;
+        this.electricityCost = electricityCost;
+        this.waterRemaining = waterRemaining;
+        this.electricityRemaining = electricityRemaining;
     }
 
-    public int getTotal() {
-        return total;
+    public float getWaterUsage() {
+        return waterUsage;
     }
 
-    public int getUsed() {
-        return used;
+    public float getWaterCost() {
+        return waterCost;
     }
 
-    public int getRemaining() {
-        return remaining;
+    public float getElectricityUsage() {
+        return electricityUsage;
     }
 
-    public int getCost() {
-        return cost;
+    public float getElectricityCost() {
+        return electricityCost;
+    }
+
+    public float getWaterRemaining() {
+        return waterRemaining;
+    }
+
+    public float getElectricityRemaining() {
+        return electricityRemaining;
     }
 }

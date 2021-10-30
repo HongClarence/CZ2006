@@ -1,24 +1,22 @@
-package com.example.cz2006.ui.settings;
+package com.example.cz2006.adapters;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.cz2006.R;
 
-public class settingCustomAdapter extends BaseAdapter {
+public class SettingCustomAdapter extends BaseAdapter {
 
     private Context mContext;
     private String[] Title;
     private int[] img;
 
-    public settingCustomAdapter(Context context, String[] text1, int[] imageIds){
+    public SettingCustomAdapter(Context context, String[] text1, int[] imageIds){
         mContext = context;
         Title = text1;
         img = imageIds;

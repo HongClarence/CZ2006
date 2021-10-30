@@ -1,9 +1,10 @@
-package com.example.cz2006.ui.settings;
+package com.example.cz2006.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,27 +23,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.cz2006.MainActivity;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.example.cz2006.R;
+import com.example.cz2006.adapters.SettingCustomAdapter;
 import com.example.cz2006.databinding.FragmentSettingsBinding;
 import com.example.cz2006.ui.login.Login;
-import com.example.cz2006.ui.login.Register;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingsFragment extends Fragment {
 
-    private SettingsViewModel settingsViewModel;
+    private SharedViewModel sharedViewModel;
     private FragmentSettingsBinding binding;
 
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
 
     private int num;
+    private float rate;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        settingsViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
+        sharedViewModel = new ViewModelProvider(getActivity()).get(SharedViewModel.class);
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
@@ -54,19 +54,20 @@ public class SettingsFragment extends Fragment {
         //String[] settings = {"Electricity Limit", "Water Limit", "Supplier"};
         int[] drawableIds = {R.drawable.ic_electricityblue, R.drawable.ic_water1, R.drawable.ic_baseline_person_24};
         //ArrayAdapter<String> arr = new ArrayAdapter<String>(this.getActivity(), R.layout.listview_item, settings);
-        settingCustomAdapter adapter = new settingCustomAdapter(this.getContext(), settings, drawableIds);
+        SettingCustomAdapter adapter = new SettingCustomAdapter(this.getContext(), settings, drawableIds);
         listSettings.setAdapter(adapter);
         listSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> myAdapter, View myView, int position, long mylng) {
 
                 switch (position) {
-                    case 1:
-                        setLimit(0);
+                    case 0:
+                        setBudget(0);
                         break;
 
-                    case 0:
-                        setLimit(1);
+                    case 1:
+                        setBudget(1);
                         break;
+
                     case 2:
                         setSupplier();
                         break;
@@ -78,7 +79,7 @@ public class SettingsFragment extends Fragment {
         ListView listLogout = binding.listLogout;
         String[] strlogout = {"Log Out"};
         int[] intlogout = {R.drawable.ic_logout};
-        settingCustomAdapter logout = new settingCustomAdapter(this.getContext(), strlogout, intlogout);
+        SettingCustomAdapter logout = new SettingCustomAdapter(this.getContext(), strlogout, intlogout);
         listLogout.setAdapter(logout);
         listLogout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -95,11 +96,21 @@ public class SettingsFragment extends Fragment {
         });
         return root;
     }
-    public void setLimit(int type){
+    public void setBudget(int type){
         Button ok_button, cancel_button;
         TextView title, units, dollarAmount;
         EditText inputAmount;
-        double rate = 1.50;
+        switch(sharedViewModel.getResponse().getValue().getUserData().getElectricitySupplier()) {
+            case "SupplierX":
+                rate = (float) 0.258;
+                break;
+            case "SupplierY":
+                rate = (float) 0.28;
+                break;
+            case "SupplierZ":
+                rate = (float) 0.3;
+                break;
+        }
 
         // using dialog builder
         dialogBuilder = new AlertDialog.Builder(this.getActivity());
@@ -127,7 +138,7 @@ public class SettingsFragment extends Fragment {
                 if(!editable.toString().trim().equals("")){
                     String input = inputAmount.getText().toString();
                     num = Integer.parseInt(input);
-                    dollarAmount.setText( "$" + (int) num * rate );
+                    dollarAmount.setText( "$" + (int) (Integer.parseInt(input) * rate) );
                 }
                 else{
                     //reset amount to 0
@@ -141,10 +152,12 @@ public class SettingsFragment extends Fragment {
         units = (TextView) popup.findViewById(R.id.text_units);
 
         if(type == 0) {
+            inputAmount.setText(String.valueOf(sharedViewModel.getResponse().getValue().getUserData().getWaterBudget()));
             title.setText("Water Limit");
             units.setText("Litres");
         }
         else {
+            inputAmount.setText(String.valueOf(sharedViewModel.getResponse().getValue().getUserData().getElectricityBudget()));
             title.setText("Electricity Limit");
             units.setText("kWh");
         }
@@ -161,6 +174,9 @@ public class SettingsFragment extends Fragment {
                 int value=0;
                 if (!"".equals(temp)){
                     value=Integer.parseInt(temp);
+                    RequestQueue queue = Volley.newRequestQueue(getActivity());
+                    queue.add(sharedViewModel.getRequest(type, String.valueOf(value)));
+                    queue.add(sharedViewModel.getRequest(3, ""));
                 }
                 dialog.dismiss();
             }
@@ -178,12 +194,6 @@ public class SettingsFragment extends Fragment {
         dialog.show();
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.getWindow().setLayout(1000, 830);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 
     public void setSupplier(){
@@ -208,6 +218,7 @@ public class SettingsFragment extends Fragment {
         ArrayAdapter adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, ElectricitySuppliers);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerElectricity.setAdapter(adapter);
+        spinnerElectricity.setSelection(adapter.getPosition(sharedViewModel.getResponse().getValue().getUserData().getElectricitySupplier()));
 
         spinnerElectricity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
@@ -251,6 +262,9 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
                 String selectedESupplier = (String) spinnerElectricity.getSelectedItem();
                 String selectedWSupplier = (String) spinnerWater.getSelectedItem();
+                RequestQueue queue = Volley.newRequestQueue(getActivity());
+                queue.add(sharedViewModel.getRequest(2,selectedESupplier));
+                queue.add(sharedViewModel.getRequest(3, ""));
                 dialog.dismiss();
             }
         });
@@ -267,5 +281,11 @@ public class SettingsFragment extends Fragment {
         dialog.show();
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.getWindow().setLayout(1000, 930);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

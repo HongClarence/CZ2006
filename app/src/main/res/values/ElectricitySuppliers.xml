@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="ElectricitySuppliers">
-        <item>Singapore Power (SP)</item>
-        <item>Best Electricity</item>
-        <item>Geneco</item>
+        <item>SupplierX</item>
+        <item>SupplierY</item>
+        <item>SupplierZ</item>
     </string-array>
 </resources>
