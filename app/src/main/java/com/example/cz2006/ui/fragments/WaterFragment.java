@@ -19,11 +19,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cz2006.MainActivity;
 import com.example.cz2006.R;
 import com.example.cz2006.adapters.VersionsAdapter;
 import com.example.cz2006.classes.ElectricityData;
@@ -58,9 +61,8 @@ public class WaterFragment extends Fragment implements AdapterView.OnItemSelecte
     private BarChart chart;
     private BarDataSet barDataSet;
     private BarData barData;
-    private List<BarEntry> barEntryList = new ArrayList<BarEntry>();
-    int[] color = new int[] {Color.RED, Color.BLACK, Color.BLUE, Color.YELLOW};
-
+    private List<BarEntry> barEntryList = new ArrayList<>();
+    int[] color;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         sharedViewModel = new ViewModelProvider(getActivity()).get(SharedViewModel.class);
@@ -68,6 +70,12 @@ public class WaterFragment extends Fragment implements AdapterView.OnItemSelecte
         View root = binding.getRoot();
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
+        color = new int[] {
+                ContextCompat.getColor(getContext(), R.color.lightBlue),
+                ContextCompat.getColor(getContext(), R.color.purple),
+                ContextCompat.getColor(getContext(), R.color.teal_700),
+                ContextCompat.getColor(getContext(), R.color.gray)
+        };
         Spinner spinner = binding.spinner;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.duration, R.layout.spinner_item);
@@ -107,12 +115,11 @@ public class WaterFragment extends Fragment implements AdapterView.OnItemSelecte
                 chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xHourly));
                 configureAndUpdate();
 
-                //Get current month and put in get(), hardcoded as 11 for demo
-                float washingMachineUsage = monthlyWater.get(11).getWashingMachine();
-                float toiletFlushUsage = monthlyWater.get(11).getToiletFlush();
-                float showerUsage = monthlyWater.get(11).getShower();
-                float tapsUsage = monthlyWater.get(11).getTaps();
-                float rate = (float) 0.2;
+                float washingMachineUsage = monthlyWater.get(monthlyWater.size() - 1).getWashingMachine();
+                float toiletFlushUsage = monthlyWater.get(monthlyWater.size() - 1).getToiletFlush();
+                float showerUsage = monthlyWater.get(monthlyWater.size() - 1).getShower();
+                float tapsUsage = monthlyWater.get(monthlyWater.size() - 1).getTaps();
+                float rate = (float) 0.00121;
 
                 List<Versions> versionsList = new ArrayList<>();
                 versionsList.add(new Versions("Washing Machine", "$" + (int)(washingMachineUsage * rate), (int)washingMachineUsage + " Litres", "You are using 29% more water in the shower than the average for your house type!\n\nYour average showering time is 15minutes.\n\nTurn off the shower tap when you are applying soap and shampoo!\n\nYou can cut down your shower time by 5 minutes to save 5 litres of water."));
@@ -122,9 +129,11 @@ public class WaterFragment extends Fragment implements AdapterView.OnItemSelecte
                 VersionsAdapter versionsAdapter = new VersionsAdapter(versionsList);
                 recyclerView.setAdapter(versionsAdapter);
 
-                int used = (int) response.getSummary().getElectricityUsage();
-                int remaining = (int) response.getSummary().getElectricityRemaining();
-                sendNotification(used * 100 / (used + remaining));
+                if(response.getUserData().getWaterBudget() != 0) {
+                    int used = (int) response.getSummary().getWaterUsage();
+                    int remaining = (int) response.getSummary().getWaterRemaining();
+                    sendNotification(used * 100 / (used + remaining));
+                }
             }
         });
         return root;
@@ -137,7 +146,7 @@ public class WaterFragment extends Fragment implements AdapterView.OnItemSelecte
         String range = parent.getItemAtPosition(pos).toString();
         barEntryList.clear();
         List<WaterData> waterDataList = null;
-                switch(range) {
+        switch(range) {
             case "Hourly":
                 waterDataList = hourlyWater;
                 chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xHourly));
@@ -192,7 +201,7 @@ public class WaterFragment extends Fragment implements AdapterView.OnItemSelecte
     }
 
     public void sendNotification(int i) {
-        if(i < 25)
+        if(i < 25 || MainActivity.waterAlert)
             return;
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -208,6 +217,7 @@ public class WaterFragment extends Fragment implements AdapterView.OnItemSelecte
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this.getActivity());
         notificationManager.notify(0, builder.build());
+        MainActivity.waterAlert = true;
     }
 
     @Override

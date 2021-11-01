@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private SharedViewModel sharedViewModel;
 
+    public static boolean waterAlert = false;
+    public static boolean electricityAlert = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

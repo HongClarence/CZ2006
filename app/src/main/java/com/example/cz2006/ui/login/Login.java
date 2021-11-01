@@ -40,6 +40,7 @@ public class Login extends AppCompatActivity {
         mPassword = (EditText) findViewById(R.id.Password);
         mRegisterLink = findViewById(R.id.RegisterLink);
         progBar= findViewById(R.id.progressBar);
+        getSupportActionBar().hide();
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +73,8 @@ public class Login extends AppCompatActivity {
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                         } else {
-                            Toast.makeText(Login.this, "Error!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Invalid user or password!", Toast.LENGTH_SHORT).show();
+                            progBar.setVisibility(View.INVISIBLE);
                         }
 
                     }
@@ -85,6 +87,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         startActivity(new Intent(getApplicationContext(), Register.class));
+                        finish();
                     }
                 });
         }

@@ -39,6 +39,7 @@ public class Register extends AppCompatActivity {
         mPhone= (EditText) findViewById(R.id.phone);
         mPassword = (EditText) findViewById(R.id.Password);
         mLoginBtn = findViewById(R.id.Loginlink);
+        getSupportActionBar().hide();
 
         progBar= findViewById(R.id.progressBar2);
 
@@ -55,17 +56,17 @@ public class Register extends AppCompatActivity {
                 String password = mPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
-                    mEmail.setError("Email is required.");
+                    mEmail.setError("Email is required");
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    mPassword.setError("Password is required. ");
+                    mPassword.setError("Password is required");
                     return;
                 }
 
                 if (password.length() < 6) {
-                    mPassword.setError("Password is must be more than 6 characters. ");
+                    mPassword.setError("Password must be more than 6 characters");
                     return;
                 }
                 progBar.setVisibility(View.VISIBLE);
@@ -73,10 +74,12 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(Register.this, "User Created.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            Toast.makeText(Register.this, "User created", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), Login.class));
+                            finish();
                         } else {
-                            Toast.makeText(Register.this, "Error!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Register.this, "Email has already been used!", Toast.LENGTH_SHORT).show();
+                            progBar.setVisibility(View.INVISIBLE);
                         }
 
                     }
@@ -89,6 +92,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),Login.class));
+                finish();
             }
         });
     }

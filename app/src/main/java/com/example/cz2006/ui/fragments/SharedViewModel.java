@@ -25,26 +25,6 @@ public class SharedViewModel extends ViewModel {
         return response;
     }
 
-    /*public void setBudget(int type, int value) {
-        String request;
-        if(type == 0) {
-            request = "/setWaterBudget/";
-            response.getValue().getUserData().setWaterBudget(value);
-        }
-        else {
-            request = "/setElectricityBudget/";
-            response.getValue().getUserData().setElectricityBudget(value);
-        }
-        request = request  + id + "/" + value;
-        getRequest(false, request);
-    }
-
-    public void setSupplier(String supplier) {
-        String request = "/setElectricitySupplier/" + id + "/" + supplier;
-        response.getValue().getUserData().setElectricitySupplier(supplier);
-        getRequest(false, request);
-    }*/
-
     public StringRequest getRequest(int type, String value) {
         String request = null;
         switch (type)

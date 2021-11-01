@@ -19,11 +19,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cz2006.MainActivity;
 import com.example.cz2006.R;
 import com.example.cz2006.adapters.VersionsAdapter;
 import com.example.cz2006.classes.ElectricityData;
@@ -57,10 +59,8 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
     private BarChart chart;
     private BarDataSet barDataSet;
     private BarData barData;
-    private List<BarEntry> barEntryList = new ArrayList<BarEntry>();
-
-    int[] color = new int[] {Color.RED, Color.BLACK, Color.BLUE, Color.YELLOW, Color.GREEN};
-    int[] test;
+    private List<BarEntry> barEntryList = new ArrayList<>();
+    int[] color;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         sharedViewModel = new ViewModelProvider(getActivity()).get(SharedViewModel.class);
@@ -68,7 +68,14 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
         View root = binding.getRoot();
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
-        test  = getActivity().getResources().getIntArray(R.array.color);
+        color = new int[] {
+                ContextCompat.getColor(getContext(), R.color.lightBlue),
+                ContextCompat.getColor(getContext(), R.color.purple),
+                ContextCompat.getColor(getContext(), R.color.teal_700),
+                ContextCompat.getColor(getContext(), R.color.gray),
+                ContextCompat.getColor(getContext(), R.color.orange),
+
+        };
         Spinner spinner = binding.spinner;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.duration, R.layout.spinner_item);
@@ -108,12 +115,11 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
                 chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xHourly));
                 configureAndUpdate();
 
-                //Get current month and put in get(), hardcoded as 11 for demo
-                float airconUsage = monthlyElectricity.get(11).getAirCon();
-                float fridgeUsage = monthlyElectricity.get(11).getFridge();
-                float tvUsage = monthlyElectricity.get(11).getTv();
-                float waterHeaterUsage = monthlyElectricity.get(11).getWaterHeater();
-                float miscUsage = monthlyElectricity.get(11).getMisc();
+                float airconUsage = monthlyElectricity.get(monthlyElectricity.size() - 1).getAirCon();
+                float fridgeUsage = monthlyElectricity.get(monthlyElectricity.size() - 1).getFridge();
+                float tvUsage = monthlyElectricity.get(monthlyElectricity.size() - 1).getTv();
+                float waterHeaterUsage = monthlyElectricity.get(monthlyElectricity.size() - 1).getWaterHeater();
+                float miscUsage = monthlyElectricity.get(monthlyElectricity.size() - 1).getMisc();
                 float rate = 0;
 
                 switch(response.getUserData().getElectricitySupplier()) {
@@ -137,9 +143,11 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
                 VersionsAdapter versionsAdapter = new VersionsAdapter(versionsList);
                 recyclerView.setAdapter(versionsAdapter);
 
-                int used = (int) response.getSummary().getElectricityUsage();
-                int remaining = (int) response.getSummary().getElectricityRemaining();
-                sendNotification(used * 100 / (used + remaining));
+                if(response.getUserData().getElectricityBudget() != 0) {
+                    int used = (int) response.getSummary().getElectricityUsage();
+                    int remaining = (int) response.getSummary().getElectricityRemaining();
+                    sendNotification(used * 100 / (used + remaining));
+                }
             }
         });
         return root;
@@ -207,7 +215,7 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
     }
 
     public void sendNotification(int i) {
-        if(i < 25)
+        if(i < 25 || MainActivity.electricityAlert)
             return;
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -224,6 +232,7 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this.getActivity());
         notificationManager.notify(1, builder.build());
+        MainActivity.electricityAlert = true;
     }
 
     @Override

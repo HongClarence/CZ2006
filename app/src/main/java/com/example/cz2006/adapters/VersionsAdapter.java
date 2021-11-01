@@ -38,14 +38,16 @@ public class VersionsAdapter extends RecyclerView.Adapter<VersionsAdapter.Versio
         holder.amountTxt.setText(versions.getAmountUsed());
         holder.tipsTxt.setText(versions.getTips());
 
-        if(position % 4 == 0)
+        if(position == 0)
             holder.linearLayout.setBackgroundResource(R.color.lightBlue);
-        else if(position % 4 == 1)
+        else if(position == 1)
             holder.linearLayout.setBackgroundResource(R.color.purple);
-        else if(position % 4 == 2)
+        else if(position == 2)
             holder.linearLayout.setBackgroundResource(R.color.teal_700);
-        else if(position % 4 == 3)
+        else if(position == 3)
             holder.linearLayout.setBackgroundResource(R.color.gray);
+        else if(position == 4)
+            holder.linearLayout.setBackgroundResource(R.color.orange);
 
         boolean isExpandable = versionsList.get(position).isExpandable();
         holder.expandableLayout.setVisibility(isExpandable ? View.VISIBLE : View.GONE);

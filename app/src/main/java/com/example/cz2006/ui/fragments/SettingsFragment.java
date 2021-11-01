@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,7 +88,7 @@ public class SettingsFragment extends Fragment {
 //                    public void onComplete(@NonNull Task<Void> task) {
 //                        // user is now signed out
                         startActivity(new Intent(myView.getContext(), Login.class));
-//
+                        getActivity().finish();//
 //                    }
 //                });
             }
@@ -114,7 +113,7 @@ public class SettingsFragment extends Fragment {
 
         // using dialog builder
         dialogBuilder = new AlertDialog.Builder(this.getActivity());
-        final View popup = getLayoutInflater().inflate(R.layout.fragment_limit,null);
+        final View popup = getLayoutInflater().inflate(R.layout.fragment_budget,null);
         dialogBuilder.setView(popup);
 
         //initialise components
