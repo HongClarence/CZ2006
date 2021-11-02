@@ -122,10 +122,10 @@ public class WaterFragment extends Fragment implements AdapterView.OnItemSelecte
                 float rate = (float) 0.00121;
 
                 List<Versions> versionsList = new ArrayList<>();
-                versionsList.add(new Versions("Washing Machine", "$" + (int)(washingMachineUsage * rate), (int)washingMachineUsage + " Litres", "You are using 29% more water in the shower than the average for your house type!\n\nYour average showering time is 15minutes.\n\nTurn off the shower tap when you are applying soap and shampoo!\n\nYou can cut down your shower time by 5 minutes to save 5 litres of water."));
-                versionsList.add(new Versions("Toilet Flush", "$" + (int)(toiletFlushUsage * rate), (int)toiletFlushUsage + " Litres", "Just don't wash clothes at home bro, just go singapore river wash."));
-                versionsList.add(new Versions("Shower", "$" + (int)(showerUsage * rate), (int)showerUsage + " Litres", "Go downstairs use toilet don't use the house one"));
-                versionsList.add(new Versions("Taps", "$" + (int)(tapsUsage * rate), (int)tapsUsage + " Litres", "hahahahha water go brrrrrr"));
+                versionsList.add(new Versions("Washing Machine", "$" + (int)(washingMachineUsage * rate), (int)washingMachineUsage + " Litres", "Always run your washing machine on a full load.\n\nWater efficient washing machine(5 ticks)."));
+                versionsList.add(new Versions("Toilet Flush", "$" + (int)(toiletFlushUsage * rate), (int)toiletFlushUsage + " Litres", "Put a plastic bottle filled with water in your toilet tank to reduce the amount of water used per flush.\n\nUse half flush unless necessary."));
+                versionsList.add(new Versions("Shower", "$" + (int)(showerUsage * rate), (int)showerUsage + " Litres", "Take shorter showers.\n\nTurn water off while applying soap."));
+                versionsList.add(new Versions("Taps", "$" + (int)(tapsUsage * rate), (int)tapsUsage + " Litres", "Switch the tap off while brushing your teeth, don’t keep the tap running!\n\nRecycle the water used to wash your rice to water your plants!"));
                 VersionsAdapter versionsAdapter = new VersionsAdapter(versionsList);
                 recyclerView.setAdapter(versionsAdapter);
 
@@ -193,7 +193,7 @@ public class WaterFragment extends Fragment implements AdapterView.OnItemSelecte
         barDataSet = new BarDataSet(barEntryList, "");
         barData = new BarData(barDataSet);
         barDataSet.setColors(color);
-        barDataSet.setStackLabels(new String[]{"Air Con", "Fridge", "TV", "Water Heater", "Misc"});
+        barDataSet.setStackLabels(new String[]{"Washing Machine", "Toilet Flush", "Shower", "Taps"});
         barData.setDrawValues(false);
         chart.setData(barData);
         chart.notifyDataSetChanged();

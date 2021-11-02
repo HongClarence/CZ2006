@@ -26,10 +26,11 @@
         <entry key="..\:/Android Studio Save/CZ2006/app/src/main/res/layout/rows_cardtips.xml" value="0.2786458333333333" />
         <entry key="..\:/Android Studio Save/CZ2006/app/src/main/res/layout/spinner_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Android Studio Save/CZ2006/app/src/main/res/menu/bottom_nav_menu.xml" value="0.26145833333333335" />
+        <entry key="app/src/main/res/layout/fragment_supplier.xml" value="0.29030797101449274" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

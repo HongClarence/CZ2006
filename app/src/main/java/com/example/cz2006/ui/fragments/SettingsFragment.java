@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -110,6 +111,9 @@ public class SettingsFragment extends Fragment {
                 rate = (float) 0.3;
                 break;
         }
+        if (type == 0) {
+            rate = (float)0.00121;
+        }
 
         // using dialog builder
         dialogBuilder = new AlertDialog.Builder(this.getActivity());
@@ -176,6 +180,8 @@ public class SettingsFragment extends Fragment {
                     RequestQueue queue = Volley.newRequestQueue(getActivity());
                     queue.add(sharedViewModel.getRequest(type, String.valueOf(value)));
                     queue.add(sharedViewModel.getRequest(3, ""));
+                    Toast.makeText(getActivity(), "Budget is set Successfully", Toast.LENGTH_SHORT).show();
+
                 }
                 dialog.dismiss();
             }

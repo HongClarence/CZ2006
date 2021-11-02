@@ -17,7 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SharedViewModel extends ViewModel {
-    private String url = "http://192.168.50.139:3000";
+    private String url = "http://10.0.2.2:3000";
     private String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private MutableLiveData<Response> response = new MutableLiveData<>();
 

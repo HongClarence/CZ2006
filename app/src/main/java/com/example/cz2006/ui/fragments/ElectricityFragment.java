@@ -135,11 +135,11 @@ public class ElectricityFragment extends Fragment implements AdapterView.OnItemS
                 }
 
                 List<Versions> versionsList = new ArrayList<>();
-                versionsList.add(new Versions("Air Con", "$" + (int)(airconUsage * rate), (int)airconUsage + " kWh", "You are using 29% more water in the shower than the average for your house type!\n\nYour average showering time is 15minutes.\n\nTurn off the shower tap when you are applying soap and shampoo!\n\nYou can cut down your shower time by 5 minutes to save 5 litres of water."));
-                versionsList.add(new Versions("Fridge", "$" + (int)(fridgeUsage * rate), (int)fridgeUsage + " kWh", "Just don't wash clothes at home bro, just go singapore river wash."));
-                versionsList.add(new Versions("TV", "$" + (int)(tvUsage * rate), (int)tvUsage + " kWh", "Go downstairs use toilet don't use the house one"));
-                versionsList.add(new Versions("Water Heater", "$" + (int)(waterHeaterUsage * rate), (int)waterHeaterUsage + " kWh", "hahahahha water go brrrrrr"));
-                versionsList.add(new Versions("Misc", "$" + (int)(miscUsage * rate), (int)miscUsage + " kWh", "hahahahha water go brrrrrr"));
+                versionsList.add(new Versions("Air Con", "$" + (int)(airconUsage * rate), (int)airconUsage + " kWh", "Only turn on the aircon if you absolutely need it!\n\n Set a timer on your aircon!."));
+                versionsList.add(new Versions("Fridge", "$" + (int)(fridgeUsage * rate), (int)fridgeUsage + " kWh", "Use more energy efficient fridge (5 ticks).\n\nDo not set the temperature too low."));
+                versionsList.add(new Versions("TV", "$" + (int)(tvUsage * rate), (int)tvUsage + " kWh", "Turn on energy saving mode.\n\nSet backlight to normal or low.\n\nAdjust contrast to “standard” instead of “dynamic”."));
+                versionsList.add(new Versions("Water Heater", "$" + (int)(waterHeaterUsage * rate), (int)waterHeaterUsage + " kWh", "Take a cool shower instead during a hot day!\n\nRemember to switch the heater off when not in use."));
+                versionsList.add(new Versions("Misc", "$" + (int)(miscUsage * rate), (int)miscUsage + " kWh", "Switch off appliances when not in use.\n\nTurn off the lights when no one is in the room.\n\nSwitch to LED lights."));
                 VersionsAdapter versionsAdapter = new VersionsAdapter(versionsList);
                 recyclerView.setAdapter(versionsAdapter);
 
